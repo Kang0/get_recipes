@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require_relative "../lib/get_recipes"
+
+GetRecipes::CLI.new.call

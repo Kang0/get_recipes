@@ -1,6 +1,2 @@
-require "get_recipes/version"
-
-module GetRecipes
-  class Error < StandardError; end
-  # Your code goes here...
-end
+require_relative "../lib/get_recipes/version"
+require_relative '../lib/get_recipes/cli'
