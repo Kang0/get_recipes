@@ -8,11 +8,9 @@ class GetRecipes::CLI
   
   def list_cuisines
     #Scrape and list the various cuisine options avaialble to choose
-    puts "1. American"
-    puts "2. British"
-    puts "3. Caribbean"
-    puts "4. Chinese"
-    puts "5. French"
+
+    GetRecipes::Cuisines.all
+    
     #ask the user to input which cuisine they want recipes for
     user_input = gets.strip.downcase
     if user_input.to_i.between?(1,5)
