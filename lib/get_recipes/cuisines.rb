@@ -1,14 +1,14 @@
-class GetRecipes::Cuisines
 
-  @@all = []
+
+class GetRecipes::Cuisines
+  
+  @@all = ["American", "British", "Caribbean", "Chinese", "French", "Greek", "Indian", "Italian", "Japanese", "Mediterranean", "Mexican", "Moroccan", "Spanish", "Thai", "Turkish", "Vietnamese"]
   
   def self.all
-    puts "1. American"
-    puts "2. British"
-    puts "3. Caribbean"
-    puts "4. Chinese"
-    puts "5. French"
+    @@all
   end
+  
+  
   
   
 
