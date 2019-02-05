@@ -3,6 +3,8 @@ class GetRecipes::CLI
   def call
     list_cuisines
     cuisine_recipe
+    individual_recipe
+    exit_program
   end
   
   def list_cuisines
@@ -16,26 +18,35 @@ class GetRecipes::CLI
   end
   
   def cuisine_recipe
-    #
-    input = gets.strip
+    #Once the appropriate cuisine is selected, scrape the cuisine recipe and provide all the recipes for that specific cuisine
+    #input a .between?(number of recipes) and use the selected input to provide the cuisine recipe list
+    user_input = gets.strip
     if input == "exit"
-      exit
-    else
-      if input == "1"
-        puts "American Recipes"
-      elsif input == "2"
-        puts "British Recipes"
-      elsif input == "3"
-        puts "Caribbean Recipes"
-      elsif input == "4"
-        puts "Chinese Recipes"
-      elsif input == "5"
-        puts "French Recipes"
+      exit_program
+    elsif user_input.to_i.between?(1-5)
+      individual_recipe(user_input.to_i)
+      
+      # if user_input == "1"
+      #   puts "American Recipes"
+      # elsif user_input == "2"
+      #   puts "British Recipes"
+      # elsif user_input == "3"
+      #   puts "Caribbean Recipes"
+      # elsif user_input == "4"
+      #   puts "Chinese Recipes"
+      # elsif user_input == "5"
+      #   puts "French Recipes"
       end
     end
   end
   
-  def exit
+  def individual_recipe(user_input)
+    #scrape the selected recipe webpage and provide the recipe information to the user
+    
+    
+  end
+  
+  def exit_program
     puts "Have a nice meal!"
   end
     
