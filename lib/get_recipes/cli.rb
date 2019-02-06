@@ -7,18 +7,18 @@ class GetRecipes::CLI
   def list_cuisines
     #Scrape and list the various cuisine options avaialble to choose
     
-    all_cuisines = GetRecipes::Cuisines.cuisine
+    @all_cuisines = GetRecipes::Cuisines.cuisine
 
     GetRecipes::Cuisines.all.each.with_index(1) do |cuisine, index|
       puts "#{index}. #{cuisine.name}"
     end
     
     puts "Which cuisine would you like to make today?"
-    
+     
     #ask the user to input which cuisine they want recipes for
     
     user_input = gets.strip.downcase
-    if user_input.to_i.between?(1,5)
+    if user_input.to_i.between?(1,GetRecipes::Cuisines.all.count)
       cuisine_recipes(user_input.to_i)
     elsif user_input == "exit"
       exit_program
@@ -33,7 +33,7 @@ class GetRecipes::CLI
     #input a .between?(number of recipes) and use the selected input to provide the cuisine recipe list
     #need to iterate over the given the recipes and use the input argument to select the correct recipes
     
-    
+    #need to utilize the input in order to get the correct url and start scraping the appropriate
     
     puts "Which recipe would you like to make?"
     

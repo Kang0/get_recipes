@@ -1,5 +1,5 @@
 class GetRecipes::Cuisines
-  attr_accessor :name, :recipes, :recipe_attributes
+  attr_accessor :name, :recipes, :recipe_attributes, :url
   
   @@all = []
   
