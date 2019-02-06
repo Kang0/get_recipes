@@ -14,6 +14,8 @@ class GetRecipes::Scraper
     # # url - doc.search(".category-item--title a").attribute("href").value
     # array = cuisine_name.split(" ")
   
+  
+  #url - doc[0].elements[0].values
   def self.get_cuisine_recipes_page
     
   end
