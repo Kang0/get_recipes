@@ -3,14 +3,19 @@ class GetRecipes::Cuisines
   
   @@all = []
   
-  def self.cuisine
-    GetRecipes::Scraper.get_cuisine_page.each do |cuisine|
-      bbc_cuisine = self.new
-      bbc_cuisine.name = cuisine
-      bbc_cuisine.recipes = ""
-      bbc_cuisine.recipe_attributes = ""
-      @@all << bbc_cuisine
-    end
+  def self.create_cuisine(cuisine)
+    self.new(
+      cuisine.text.strip,
+      cuisine.elements[0].values[0]
+      )
+  end
+  
+  def initialize(name = nil, url = nil, recipes = nil, recipe_attributes = nil)
+    @name = name
+    @url = url
+    @recipe_attributes = recipe_attributes
+    @recipes = recipes
+    @@all << self
   end
   
   def self.all

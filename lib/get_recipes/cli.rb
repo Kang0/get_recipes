@@ -1,13 +1,12 @@
 class GetRecipes::CLI
   
   def call
+    GetRecipes::Scraper.new.make_cuisine_attribute
     list_cuisines
   end
   
   def list_cuisines
     #Scrape and list the various cuisine options avaialble to choose
-    
-    @all_cuisines = GetRecipes::Cuisines.cuisine
 
     GetRecipes::Cuisines.all.each.with_index(1) do |cuisine, index|
       puts "#{index}. #{cuisine.name}"
@@ -18,6 +17,10 @@ class GetRecipes::CLI
     #ask the user to input which cuisine they want recipes for
     
     user_input = gets.strip.downcase
+    
+    
+    
+    
     if user_input.to_i.between?(1,GetRecipes::Cuisines.all.count)
       cuisine_recipes(user_input.to_i)
     elsif user_input == "exit"
