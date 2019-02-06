@@ -31,12 +31,13 @@ class GetRecipes::CLI
     #input a .between?(number of recipes) and use the selected input to provide the cuisine recipe list
     #need to iterate over the given the recipes and use the input argument to select the correct recipes
     
+    
+    
     puts "Which recipe would you like to make?"
-    puts "1. Buffalo Chicken"
-    puts "2. Texas BBQ Medley"
-    puts "3. S'mores Dip"
-    puts "4. Fully Loaded Cajun Chicken Burgers"
-    puts "5. Tomato, Avocado & Corn Salad With Migas & Buttermilk Dressing"
+    
+    GetRecipes::CuisineRecipes.recipes.each.with_index(1) do |recipe, index|
+      puts "#{index}. #{recipe.name} - #{recipe.time} / #{recipe.difficulty} / #{recipe.vegetarian}."
+    end
     
     user_input = gets.strip.downcase
     if user_input.to_i.between?(1,5)
@@ -55,15 +56,18 @@ class GetRecipes::CLI
     #scrape the selected recipe webpage and provide the recipe information to the user
     #need to iterate over the user inputted recipe number and provide the information below
     
-    puts "Serving Size - 4"
-    puts "Nutritional Information: "
-    puts "kcal - 500"
-    puts "Fat - 5g"
-    puts "Ingredients:"
-    puts "Buffalo Sauce"
-    puts "Chicken Thighs"
-    puts "Method:"
-    puts "Place in Oven"
+    recipe = GetRecipes::Recipe.ingredients
+    
+    GetRecipes::Recipe.ingredients.each.with_index(1) do |attributes, index|
+      puts "Serving Size - #{attributes.serving_size}"
+      puts "Nutrional Information:"
+      puts "kcal - #{} / fat - #{} / saturates - #{} / carbs - #{} / sugars - #{} / fibre - #{} / protein - #{} / salt - #{}"
+      puts "Ingredients:"
+      puts "#{attributes.ingredients}"
+      puts "Methods:"
+      puts "#{attributes.methods}"
+    end
+
     puts "Type list to return to the Cuisine List or type exit."
     
     ind_recipe_input = gets.strip.downcase
