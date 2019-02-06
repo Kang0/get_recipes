@@ -4,23 +4,40 @@ class GetRecipes::CuisineRecipes
   #The Scraper method would have to retrieve all the recipes from each cuisine and place it into an Array
   #or, the method will know to scrape a particualar webpage given the user's input of which cuisine they want the recipes for
   
-  attr_accessor :name, :time, :difficulty, :vegetarian
+  attr_accessor :name, :time, :difficulty
   
-  def self.recipes
-    recipe_1 = self.new
-    recipe_1.name = "Buffalo Chicken"
-    recipe_1.time = "1 hour and 35 minutes"
-    recipe_1.difficulty = "More Effort"
-    recipe_1.vegetarian = false 
-    
-    recipe_2 = self.new
-    recipe_2.name = "Texas BBQ Medley"
-    recipe_2.time = "7 Hours"
-    recipe_2.difficulty = "More Effort"
-    recipe_2.vegetarian = false 
-    
-    [recipe_1, recipe_2]
+  #using the provided url link from CLI class, we can start scraping the appropriate url to retrieve the recipe information
+  
+  @@all = []
+  
+  def self.create_recipe(recipe)
+    self.new(
+      recipe.css(".teaser-item__title").text.strip,
+      recipe.css(".teaser-item__info-item--total-time").text.strip,
+      recipe.css(".teaser-item__info-item--skill-level").text.strip
+      )
   end
+  
+  def initialize(name = nil, time = nil, difficulty = nil)
+    @name = name
+    @time = time
+    @difficulty = difficulty
+    @@all << self
+  end
+  
+  def self.all
+    @@all
+  end
+  
+  
+  # def recipes(link)
+  #   recipe_array = []
+    
+    
+  
+
+  #   #return an array - recipe_array
+  # end
   
   
   

@@ -14,8 +14,20 @@ class GetRecipes::Scraper
     end
   end
   
-  def self.get_cuisine_recipes_page
-    
+  #we can put the user input url straight into the below class
+  
+  def get_cuisine_recipe_page(url)
+    @doc = Nokogiri::HTML(open("https://www.bbcgoodfood.com#{url}"))
+  end
+  
+  def get_cuisine_recipes
+    @doc.css(".node-teaser-item")
+  end
+  
+  def make_cuisine_recipe_attribute
+    get_cuisine_recipes.each do |recipe|
+      GetRecipes::CuisineRecipes.create_recipe(recipe)
+    end
   end
     
   
