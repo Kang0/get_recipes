@@ -6,9 +6,11 @@ class GetRecipes::CLI
   
   def list_cuisines
     #Scrape and list the various cuisine options avaialble to choose
+    
+    all_cuisines = GetRecipes::Cuisines.cuisine
 
     GetRecipes::Cuisines.all.each.with_index(1) do |cuisine, index|
-      puts "#{index} #{cuisine}"
+      puts "#{index}. #{cuisine.name}"
     end
     
     puts "Which cuisine would you like to make today?"

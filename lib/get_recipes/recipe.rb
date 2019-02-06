@@ -1,4 +1,4 @@
-class GetIngredients::Recipe
+class GetRecipes::Recipe
   
   attr_accessor :serving_size, :nutritional, :ingredients, :methods
   
