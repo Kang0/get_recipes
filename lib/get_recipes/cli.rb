@@ -2,7 +2,7 @@ class GetRecipes::CLI
   
   def call
     @@scrape = GetRecipes::Scraper.new
-    @@scrape_information.make_cuisine_attribute
+    @@scrape.make_cuisine_attribute
     list_cuisines
   end
   
@@ -84,9 +84,12 @@ class GetRecipes::CLI
       puts "Serving - #{ingredient.serving_size}"
       puts "Nutritional Information: "
       ingredient.nutritional.each do |nutrition, value|
-        binding.pry
+        puts "#{nutrition}: #{value}"
       end
-      
+      puts "Ingredients: "
+      ingredient.ingredients.each do |i|
+        puts "#{i}"
+      end
     end
 
     puts "Type list to return to the Cuisine List or type exit."
