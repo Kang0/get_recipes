@@ -90,6 +90,10 @@ class GetRecipes::CLI
       ingredient.ingredients.each do |i|
         puts "#{i}"
       end
+      puts "Methods: "
+      ingredient.methods.each.with_index(1) do |method, index|
+        puts "#{index}. #{method}"
+      end
     end
 
     puts "Type list to return to the Cuisine List or type exit."
