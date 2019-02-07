@@ -20,8 +20,11 @@ class GetRecipes::Recipe
   def self.create_recipe_attribute(recipe)
     nutrition_hash = {}
     recipe.css(".nutrition li").each do |nutrition|
-      binding.pry
+      nutrition_hash[nutrition.css(".nutrition__label").text] = nutrition.css(".nutrition__value").text
     end
+    
+    binding.pry
+    
     # self.new(
     #   recipe.css(".recipe-details__item--servings").text.strip,
     #   nutrition_hash,
