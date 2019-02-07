@@ -1,7 +1,8 @@
 class GetRecipes::CLI
   
   def call
-    GetRecipes::Scraper.new.make_cuisine_attribute
+    @@scrape_information = GetRecipes::Scraper.new
+    @@scrape_information.make_cuisine_attribute
     list_cuisines
   end
   
@@ -38,9 +39,8 @@ class GetRecipes::CLI
     
     #need to utilize the input in order to get the correct url and start scraping the appropriate
     
-    scrape_recipes = GetRecipes::Scraper.new
-    scrape_recipes.get_cuisine_recipe_page(url_link)
-    scrape_recipes.make_cuisine_recipe_attribute
+    @@scrape_information.get_cuisine_recipe_page(url_link)
+    @@scrape_information.make_cuisine_recipe_attribute
     
     puts "Which recipe would you like to make?"
     
@@ -49,8 +49,10 @@ class GetRecipes::CLI
     end
     
     user_input = gets.strip.downcase
-    if user_input.to_i.between?(1,5)
-      individual_recipe(user_input.to_i)
+    
+    if user_input.to_i.between?(1,GetRecipes::CuisineRecipes.all.count)
+      url = GetRecipes::CuisineRecipes.all[user_input.to_i - 1].url
+      individual_recipe(url)
     elsif user_input == "exit"
       exit_program
     elsif user_input == "list"
@@ -61,11 +63,9 @@ class GetRecipes::CLI
     end
   end
   
-  def individual_recipe(user_input)
+  def individual_recipe(url_link)
     #scrape the selected recipe webpage and provide the recipe information to the user
     #need to iterate over the user inputted recipe number and provide the information below
-    
-    recipe = GetRecipes::Recipe.ingredients
     
     GetRecipes::Recipe.ingredients.each.with_index(1) do |attributes, index|
       puts "Serving Size - #{attributes.serving_size}"

@@ -30,9 +30,20 @@ class GetRecipes::Scraper
     end
   end
     
+  #similar to the above code, we can input the user input url straight into the below Recipe scraper helper_method
   
-  # def scrape_cuisine_index
-  #   self.get_cuisine_page.css()
-  # end
+  def get_recipe_page
+    Nokogiri::HTML(open("https://www.bbcgoodfood.com/recipes/buffalo-chicken"))
+  end
+  
+  def get_individual_recipe
+    get_recipe_page.css(".container-wrapper")
+  end
+  
+  def make_recipe_attribute
+    get_individual_recipe.each do |recipe|
+      GetRecipes::Recipe.create_recipe_attribute(recipe)
+    end
+  end
   
 end
