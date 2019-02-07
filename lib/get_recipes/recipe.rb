@@ -19,10 +19,15 @@ class GetRecipes::Recipe
   
   def self.create_recipe_attribute(recipe)
     nutrition_hash = {}
+    ingredients_array = []
     recipe.css(".nutrition li").each do |nutrition|
       nutrition_hash[nutrition.css(".nutrition__label").text] = nutrition.css(".nutrition__value").text
     end
     
+    recipe.css(".ingredients-list__group li").each do |ingredient|
+      ingredients_array << ingredient["content"]
+    end
+
     binding.pry
     
     # self.new(
