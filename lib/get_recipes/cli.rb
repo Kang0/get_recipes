@@ -67,19 +67,20 @@ class GetRecipes::CLI
     #scrape the selected recipe webpage and provide the recipe information to the user
     #need to iterate over the user inputted recipe number and provide the information below
     
-    GetRecipes::Recipe.ingredients.each.with_index(1) do |attributes, index|
-      puts "Serving Size - #{attributes.serving_size}"
-      puts "Nutrional Information:"
-      puts "kcal - #{} / fat - #{} / saturates - #{} / carbs - #{} / sugars - #{} / fibre - #{} / protein - #{} / salt - #{}"
-      puts "Ingredients:"
-      puts "#{attributes.ingredients}"
-      puts "Methods:"
-      puts "#{attributes.methods}"
-    end
+    # GetRecipes::Recipe.ingredients.each.with_index(1) do |attributes, index|
+    #   puts "Serving Size - #{attributes.serving_size}"
+    #   puts "Nutrional Information:"
+    #   puts "kcal - #{} / fat - #{} / saturates - #{} / carbs - #{} / sugars - #{} / fibre - #{} / protein - #{} / salt - #{}"
+    #   puts "Ingredients:"
+    #   puts "#{attributes.ingredients}"
+    #   puts "Methods:"
+    #   puts "#{attributes.methods}"
+    # end
 
     puts "Type list to return to the Cuisine List or type exit."
     
     ind_recipe_input = gets.strip.downcase
+    
     if ind_recipe_input == "exit"
       exit_program
     elsif ind_recipe_input == "list"
