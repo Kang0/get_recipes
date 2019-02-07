@@ -82,17 +82,24 @@ class GetRecipes::CLI
     
     GetRecipes::Recipe.all.each do |ingredient|
       puts "Serving - #{ingredient.serving_size}"
+      puts ""
       puts "Nutritional Information: "
+      puts ""
       ingredient.nutritional.each do |nutrition, value|
         puts "#{nutrition}: #{value}"
       end
+      puts ""
       puts "Ingredients: "
+      puts ""
       ingredient.ingredients.each do |i|
         puts "#{i}"
       end
+      puts ""
       puts "Methods: "
+      puts ""
       ingredient.methods.each.with_index(1) do |method, index|
-        puts "#{index}. #{method}"
+        puts "#{index}. #{method}\n"
+        puts ""
       end
     end
 
