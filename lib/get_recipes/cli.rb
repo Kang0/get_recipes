@@ -1,7 +1,7 @@
 class GetRecipes::CLI
   
   def call
-    @@scrape_information = GetRecipes::Scraper.new
+    @@scrape = GetRecipes::Scraper.new
     @@scrape_information.make_cuisine_attribute
     list_cuisines
   end
@@ -23,6 +23,7 @@ class GetRecipes::CLI
     
     if user_input.to_i.between?(1,GetRecipes::Cuisines.all.count)
       url_link = GetRecipes::Cuisines.all[user_input.to_i - 1].url
+      @@scrape.get_cuisine_recipe_page(url_link)
       cuisine_recipes(url_link)
     elsif user_input == "exit"
       exit_program
@@ -38,9 +39,8 @@ class GetRecipes::CLI
     #need to iterate over the given the recipes and use the input argument to select the correct recipes
     
     #need to utilize the input in order to get the correct url and start scraping the appropriate
-    
-    @@scrape_information.get_cuisine_recipe_page(url_link)
-    @@scrape_information.make_cuisine_recipe_attribute
+
+    @@scrape.make_cuisine_recipe_attribute
     
     puts "Which recipe would you like to make?"
     
@@ -52,6 +52,7 @@ class GetRecipes::CLI
     
     if user_input.to_i.between?(1,GetRecipes::CuisineRecipes.all.count)
       url = GetRecipes::CuisineRecipes.all[user_input.to_i - 1].url
+      @@scrape.get_recipe_page(url)
       individual_recipe(url)
     elsif user_input == "exit"
       exit_program
@@ -76,6 +77,17 @@ class GetRecipes::CLI
     #   puts "Methods:"
     #   puts "#{attributes.methods}"
     # end
+    
+    @@scrape.make_recipe_attribute
+    
+    GetRecipes::Recipe.all.each do |ingredient|
+      puts "Serving - #{ingredient.serving_size}"
+      puts "Nutritional Information: "
+      ingredient.nutritional.each do |nutrition, value|
+        binding.pry
+      end
+      
+    end
 
     puts "Type list to return to the Cuisine List or type exit."
     
