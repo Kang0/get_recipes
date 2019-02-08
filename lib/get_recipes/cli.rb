@@ -22,8 +22,8 @@ class GetRecipes::CLI
     #using the user_input, we can grab the specific url to scrape
     
     if user_input.to_i.between?(1,GetRecipes::Cuisines.all.count)
-      url_link = GetRecipes::Cuisines.all[user_input.to_i - 1].url
-      cuisine_recipes(url_link)
+      cuisine = GetRecipes::Cuisines.all[user_input.to_i - 1]
+      display_recipes(cuisine)
     elsif user_input == "exit"
       exit_program
     else
@@ -32,15 +32,14 @@ class GetRecipes::CLI
     end
   end
   
-  def cuisine_recipes(url_link)
+  def display_recipes(cuisine)
     #Once the appropriate cuisine is selected, scrape the cuisine recipe and provide all the recipes for that specific cuisine
     #input a .between?(number of recipes) and use the selected input to provide the cuisine recipe list
     #need to iterate over the given the recipes and use the input argument to select the correct recipes
     
     #need to utilize the input in order to get the correct url and start scraping the appropriate
 
-    @@scrape.get_recipe_page(url_link)
-    @@scrape.make_cuisine_recipe_attribute
+    cuisine.recipe
     
     puts "Which recipe would you like to make?"
     

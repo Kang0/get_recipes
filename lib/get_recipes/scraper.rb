@@ -24,8 +24,7 @@ class GetRecipes::Scraper
     @doc.css(".node-teaser-item")
   end
   
-  def make_cuisine_recipe_attribute
-    GetRecipes::CuisineRecipes.all.clear
+  def make_cuisine_recipe_attribute(cuisine_object)
     get_cuisine_recipes.each do |recipe|
       GetRecipes::CuisineRecipes.create_recipe(recipe)
     end
@@ -42,7 +41,6 @@ class GetRecipes::Scraper
   end
   
   def make_recipe_attribute
-    GetRecipes::Recipe.all.clear
     get_individual_recipe.each do |recipe|
       GetRecipes::Recipe.create_recipe_attribute(recipe)
     end

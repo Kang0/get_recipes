@@ -1,5 +1,5 @@
 class GetRecipes::Cuisines
-  attr_accessor :name, :recipes, :recipe_attributes, :url
+  attr_accessor :name, :recipe_attributes, :url, :scraped_recipes
   
   @@all = []
   
@@ -14,12 +14,24 @@ class GetRecipes::Cuisines
     @name = name
     @url = url
     @recipe_attributes = recipe_attributes
-    @recipes = recipes
+    @scraped_recipes = false
     @@all << self
   end
   
   def self.all
     @@all
   end
+  
+  def recipes
+    if @scraped_recipes
+      GetRecipes::CuisineRecipes.all.select do |r|
+        r.cuisine == self
+      end
+    else
+       GetRecipes::Scraper.new.get_cuisine_recipe_page(self.url).make_cuisine_recipe_attribute(self)
+       @scraped_recipes = true
+    end
+  end
+
   
 end
