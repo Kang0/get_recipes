@@ -62,10 +62,8 @@ class GetRecipes::CLI
   def display_individual_recipe(cuisine_recipe)
     #scrape the selected recipe webpage and provide the recipe information to the user
     #need to iterate over the user inputted recipe number and provide the information below
-    
-    @@scrape.make_recipe_attribute
-    
-    GetRecipes::Recipe.all.each do |ingredient|
+  
+    cuisine_recipe.individual_recipe.each do |ingredient|
       puts "Serving - #{ingredient.serving_size}"
       puts ""
       puts "Nutritional Information: "
@@ -87,6 +85,29 @@ class GetRecipes::CLI
         puts ""
       end
     end
+    
+    # GetRecipes::Recipe.all.each do |ingredient|
+    #   puts "Serving - #{ingredient.serving_size}"
+    #   puts ""
+    #   puts "Nutritional Information: "
+    #   puts ""
+    #   ingredient.nutritional.each do |nutrition, value|
+    #     puts "#{nutrition}: #{value}"
+    #   end
+    #   puts ""
+    #   puts "Ingredients: "
+    #   puts ""
+    #   ingredient.ingredients.each do |i|
+    #     puts "#{i}"
+    #   end
+    #   puts ""
+    #   puts "Methods: "
+    #   puts ""
+    #   ingredient.methods.each.with_index(1) do |method, index|
+    #     puts "#{index}. #{method}\n"
+    #     puts ""
+    #   end
+    # end
 
     puts "Type list to return to the Cuisine List or type exit."
     

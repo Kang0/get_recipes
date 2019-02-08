@@ -40,9 +40,9 @@ class GetRecipes::Scraper
     @doc.css(".container-wrapper")
   end
   
-  def make_recipe_attribute
+  def make_recipe_attribute(cuisine_recipe_object)
     get_individual_recipe.each do |recipe|
-      GetRecipes::Recipe.create_recipe_attribute(recipe)
+      GetRecipes::Recipe.create_recipe_attribute(recipe, cuisine_recipe_object)
     end
   end
   

@@ -10,7 +10,7 @@ class GetRecipes::Cuisines
       )
   end
   
-  def initialize(name = nil, url = nil, recipes = nil, recipe_attributes = nil)
+  def initialize(name = nil, url = nil, recipe_attributes = nil)
     @name = name
     @url = url
     @recipe_attributes = recipe_attributes

@@ -1,18 +1,19 @@
 class GetRecipes::Recipe
   
-  attr_accessor :serving_size, :nutritional, :ingredients, :methods
+  attr_accessor :serving_size, :nutritional, :ingredients, :methods, :cuisine_recipe
   
   @@all = []
   
-  def initialize(serving_size = nil, nutritional = {}, ingredients = [], methods = [])
+  def initialize(serving_size = nil, nutritional = {}, ingredients = [], methods = [], cuisine_recipe = nil)
     @serving_size = serving_size
     @nutritional = nutritional
     @ingredients = ingredients
     @methods = methods
+    @cuisine_recipe = cuisine_recipe
     @@all << self
   end
   
-  def self.create_recipe_attribute(recipe)
+  def self.create_recipe_attribute(recipe, cuisine_recipe_object)
     
     nutrition_hash = {}
     ingredients_array = []
@@ -34,7 +35,8 @@ class GetRecipes::Recipe
       recipe.css(".recipe-details__item--servings").text.strip,
       nutrition_hash,
       ingredients_array,
-      methods_array
+      methods_array,
+      cuisine_recipe_object
       )
     
   end
@@ -42,8 +44,6 @@ class GetRecipes::Recipe
   def self.all
     @@all
   end
-  
-  #possibly create another method to handle creating the arrays and hashes 
   
   
 end
