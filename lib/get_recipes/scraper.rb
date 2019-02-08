@@ -25,6 +25,7 @@ class GetRecipes::Scraper
   end
   
   def make_cuisine_recipe_attribute
+    GetRecipes::CuisineRecipes.all.clear
     get_cuisine_recipes.each do |recipe|
       GetRecipes::CuisineRecipes.create_recipe(recipe)
     end
@@ -41,6 +42,7 @@ class GetRecipes::Scraper
   end
   
   def make_recipe_attribute
+    GetRecipes::Recipe.all.clear
     get_individual_recipe.each do |recipe|
       GetRecipes::Recipe.create_recipe_attribute(recipe)
     end

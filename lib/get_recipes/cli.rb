@@ -23,7 +23,6 @@ class GetRecipes::CLI
     
     if user_input.to_i.between?(1,GetRecipes::Cuisines.all.count)
       url_link = GetRecipes::Cuisines.all[user_input.to_i - 1].url
-      @@scrape.get_cuisine_recipe_page(url_link)
       cuisine_recipes(url_link)
     elsif user_input == "exit"
       exit_program
@@ -40,6 +39,7 @@ class GetRecipes::CLI
     
     #need to utilize the input in order to get the correct url and start scraping the appropriate
 
+    @@scrape.get_recipe_page(url_link)
     @@scrape.make_cuisine_recipe_attribute
     
     puts "Which recipe would you like to make?"
