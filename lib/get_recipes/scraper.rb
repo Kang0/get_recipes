@@ -26,7 +26,7 @@ class GetRecipes::Scraper
   
   def make_cuisine_recipe_attribute(cuisine_object)
     get_cuisine_recipes.each do |recipe|
-      GetRecipes::CuisineRecipes.create_recipe(recipe)
+      GetRecipes::CuisineRecipes.create_recipe(recipe, cuisine_object)
     end
   end
     

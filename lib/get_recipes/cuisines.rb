@@ -28,8 +28,13 @@ class GetRecipes::Cuisines
         r.cuisine == self
       end
     else
-       GetRecipes::Scraper.new.get_cuisine_recipe_page(self.url).make_cuisine_recipe_attribute(self)
+       new_cuisine_recipe = GetRecipes::Scraper.new
+       new_cuisine_recipe.get_cuisine_recipe_page(self.url)
+       new_cuisine_recipe.make_cuisine_recipe_attribute(self)
        @scraped_recipes = true
+       GetRecipes::CuisineRecipes.all.select do |r|
+         r.cuisine == self
+       end
     end
   end
 
