@@ -6,7 +6,6 @@ class GetRecipes::CLI
   end
   
   def list_cuisines
-    #Scrape and list the various cuisine options avaialble to choose
 
     GetRecipes::Cuisines.all.each.with_index(1) do |cuisine, index|
       puts "#{index}. #{cuisine.name}"
@@ -14,11 +13,7 @@ class GetRecipes::CLI
     
     puts "Which cuisine would you like to make today?"
      
-    #ask the user to input which cuisine they want recipes for
-    
     user_input = gets.strip.downcase
-    
-    #using the user_input, we can grab the specific url to scrape
     
     if user_input.to_i.between?(1,GetRecipes::Cuisines.all.count)
       cuisine = GetRecipes::Cuisines.all[user_input.to_i - 1]
@@ -32,17 +27,12 @@ class GetRecipes::CLI
   end
   
   def display_recipes(cuisine)
-    #Once the appropriate cuisine is selected, scrape the cuisine recipe and provide all the recipes for that specific cuisine
-    #input a .between?(number of recipes) and use the selected input to provide the cuisine recipe list
-    #need to iterate over the given the recipes and use the input argument to select the correct recipes
-    
-    #need to utilize the input in order to get the correct url and start scraping the appropriate
-    
-    puts "Which recipe would you like to make?"
     
     cuisine.recipes.each.with_index(1) do |recipe, index|
       puts "#{index}. #{recipe.name} - #{recipe.time} / #{recipe.difficulty}"
     end
+    
+    puts "Which recipe would you like to make?"
     
     user_input = gets.strip.downcase
     
@@ -54,14 +44,12 @@ class GetRecipes::CLI
     elsif user_input == "list"
       list_cuisines
     else
-      puts "Please select the cuisine again and input the appropriate cuisine recipe number:"
-      list_cuisines
+      puts "Please type the number you would like to get the recipe for, type list to go back to the cuisine list, or type exit:"
+      display_recipes(cuisine)
     end
   end
   
   def display_individual_recipe(cuisine_recipe)
-    #scrape the selected recipe webpage and provide the recipe information to the user
-    #need to iterate over the user inputted recipe number and provide the information below
   
     cuisine_recipe.individual_recipe.each do |ingredient|
       puts "Serving - #{ingredient.serving_size}"
