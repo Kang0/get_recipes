@@ -67,8 +67,7 @@ class GetRecipes::CLI
     elsif ind_recipe_input == "list"
       list_cuisines
     elsif ind_recipe_input == "back"
-      binding.pry
-      display_recipes(cuisine_recipe)
+      display_recipes(cuisine_recipe.cuisine)
     else
       puts "Please select the cuisine again and either input exit or list"
       list_cuisines
