@@ -11,6 +11,7 @@ class GetRecipes::CLI
       puts "#{index}. #{cuisine.name}"
     end
     
+    puts ""
     puts "Which cuisine would you like to make today?"
      
     user_input = gets.strip.downcase
@@ -32,7 +33,10 @@ class GetRecipes::CLI
       puts "#{index}. #{recipe.name} - #{recipe.time} / #{recipe.difficulty}"
     end
     
+    puts ""
     puts "Which recipe would you like to make?"
+    puts ""
+    puts "Type the recipe number for more information, type 'list' to go back to the cuisine list, or type 'exit'"
     
     user_input = gets.strip.downcase
     
@@ -44,13 +48,34 @@ class GetRecipes::CLI
     elsif user_input == "list"
       list_cuisines
     else
-      puts "Please type the number you would like to get the recipe for, type list to go back to the cuisine list, or type exit:"
+      puts "Type the recipe number for more information, type 'back' to go back to the cuisine recipes, type 'list' to go back to the cuisine list, or type 'exit':"
+      puts ""
       display_recipes(cuisine)
     end
   end
   
   def display_individual_recipe(cuisine_recipe)
   
+    show_individual_recipes(cuisine_recipe)
+
+    puts "Type 'back' to return to the cuisine recipes', type 'list' to return to the cuisine list, or type 'exit'"
+    
+    ind_recipe_input = gets.strip.downcase
+    
+    if ind_recipe_input == "exit"
+      exit_program
+    elsif ind_recipe_input == "list"
+      list_cuisines
+    elsif ind_recipe_input == "back"
+      binding.pry
+      display_recipes(cuisine_recipe)
+    else
+      puts "Please select the cuisine again and either input exit or list"
+      list_cuisines
+    end
+  end
+  
+  def show_individual_recipes(cuisine_recipe)
     cuisine_recipe.individual_recipe.each do |ingredient|
       puts "Serving - #{ingredient.serving_size}"
       puts ""
@@ -72,19 +97,6 @@ class GetRecipes::CLI
         puts "#{index}. #{method}\n"
         puts ""
       end
-    end
-
-    puts "Type list to return to the Cuisine List or type exit."
-    
-    ind_recipe_input = gets.strip.downcase
-    
-    if ind_recipe_input == "exit"
-      exit_program
-    elsif ind_recipe_input == "list"
-      list_cuisines
-    else
-      puts "Please select the cuisine again and either input exit or list"
-      list_cuisines
     end
   end
   
