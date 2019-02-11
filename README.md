@@ -1,8 +1,6 @@
 # GetRecipes
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/get_recipes`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This Ruby gem allows the user to select a specific cuisine recipe from a list of 16 different cuisines. Inside each cuisine is a list of recipes that the user can select to retrieve more information. The information provided will be serving size, nutritional information, ingredients and methods to make the specific recipe.
 
 ## Installation
 
@@ -22,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+~./bin/get-recipes
 
 ## Development
 
